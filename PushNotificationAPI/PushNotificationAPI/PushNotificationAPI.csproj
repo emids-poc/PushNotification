@@ -11,6 +11,7 @@
   <ItemGroup>
     <PackageReference Include="FcmSharp" Version="2.3.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
+    <PackageReference Include="RabbitMQ.Client" Version="5.1.0" />
   </ItemGroup>
 
   <ItemGroup>
