@@ -8,6 +8,7 @@ namespace PushNotificationAPI.Models
     public class User
     {
         public string token { get; set; }
-        public string userId { get; set; }
+        public string body { get; set; }
+        public string title { get; set; }
     }
 }

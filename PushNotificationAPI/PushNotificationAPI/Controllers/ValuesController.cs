@@ -71,10 +71,40 @@ namespace PushNotificationAPI.Controllers
             Console.WriteLine("Token :" + user.token);
         }
 
-        [HttpPost("/post_message")]
+        [HttpPost("post_message")]
         public void PostMessage([FromBody]User user)
         {
-            Console.WriteLine("Token :" + user.token);
+            var settings = FileBasedFcmClientSettings.CreateFromFile("pushnotificationpoc-6a4f2", @"E:\New folder\Navvis\codebase\CoreoHome\Push Notification\serviceAccountKey.json");
+
+            // Construct the Client:
+            using (var client = new FcmClient(settings))
+            {
+
+                // The Message should be sent to the News Topic:
+                var message = new FcmMessage()
+                {
+                    ValidateOnly = false,
+                    Message = new Message
+                    {
+                        Token = user.token,
+                        Notification = new Notification
+                        {
+                            Title = user.title,
+                            Body = user.body
+                        }
+                    }
+                };
+
+                // Finally send the Message and wait for the Result:
+                CancellationTokenSource cts = new CancellationTokenSource();
+
+
+                // Send the Message and wait synchronously:
+                var result = client.SendAsync(message, cts.Token).GetAwaiter().GetResult();
+
+                // Print the Result to the Console:
+                Console.WriteLine("Message ID = {0}", result.Name);
+            }
         }
 
         // PUT api/values/5

@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View, TextInput, Button} from 'react-native';
 import firebase, { RemoteMessage } from 'react-native-firebase';
 
 const instructions = Platform.select({
@@ -19,8 +19,10 @@ const instructions = Platform.select({
 
 export default class App extends Component {
 
-  state ={
-    token: ''
+  state = {
+    token: '',
+    body: '',
+    title: ''
   }
 
   componentDidMount() {
@@ -51,29 +53,28 @@ export default class App extends Component {
           console.log("Token: " + fcmToken);
           this.setState({token: fcmToken});
         } else {
-          alert("No Token Generated");
+          console.log("No Token Generated");
         } 
       });
 
     this.onTokenRefreshListener = firebase.messaging().onTokenRefresh(fcmToken => {
-      //console.log("Token: " + fcmToken);
-      //this.setState({token: fcmToken});
+      alert("Token: " + fcmToken);
     });
 
     this.notificationDisplayedListener = firebase.notifications().onNotificationDisplayed((notification) => {
-      alert("onNotificationDisplayed: " + notification);
+      console.log("onNotificationDisplayed: " + notification);
     });
     this.notificationListener = firebase.notifications().onNotification((notification) => {
-      alert("onNotification: " + notification);
+      console.log("onNotification: " + notification);
     });
 
     this.notificationOpenedListener = firebase.notifications().onNotificationOpened((notificationOpen) => {
       // Get the action triggered by the notification being opened
         const action = notificationOpen.action;
-        alert("notificationOpen.action: " + notificationOpen.action);
+        console.log("notificationOpen.action: " + notificationOpen.action);
         // Get information about the notification that was opened
         const notification = notificationOpen.notification;
-        alert("notificationOpen.notification: " + notificationOpen.notification);
+        console.log("notificationOpen.notification: " + notificationOpen.notification);
     });
 
     firebase.notifications().getInitialNotification()
@@ -81,10 +82,10 @@ export default class App extends Component {
         if (notificationOpen) {
           // App was opened by a notification
           const action = notificationOpen.action;
-          alert("notificationOpen.action: " + notificationOpen.action);
+          console.log("notificationOpen.action: " + notificationOpen.action);
           // Get information about the notification that was opened
           const notification = notificationOpen.notification;
-          alert("notificationOpen.notification: " + notificationOpen.notification);
+          console.log("notificationOpen.notification: " + notificationOpen.notification);
         }
       });
 
@@ -106,13 +107,37 @@ export default class App extends Component {
     this.notificationOpenedListener();
   }
 
+  sendNotification = () => {
+    fetch("http://52.172.45.185:9000/api/values/post_message", {
+      method: 'post',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(this.state)
+    }).then((data) => {
+      console.log(data);
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+        <Text style={styles.welcome}>Push Notification Using React Native!</Text>
         <Text style={styles.instructions}>{this.state.token}</Text>
+        <TextInput
+          style={{height: 40, borderColor: 'gray', borderWidth: 1, width: 300}}
+          onChangeText={(title) => this.setState({title})}
+          value={this.state.title}
+          placeholder="Title"
+        />
+        <TextInput
+          style={{height: 40, borderColor: 'gray', borderWidth: 1, width: 300}}
+          onChangeText={(body) => this.setState({body})}
+          value={this.state.body}
+          placeholder="Body"
+        />
+        <Button
+          onPress={this.sendNotification}
+          title="Send Notification"
+        />
       </View>
     );
   }

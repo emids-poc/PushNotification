@@ -12993,11 +12993,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\New folder\\Navvis\\codebase\\CoreoHome\\Push Notification\\PushNotificationAPI\\PushNotificationAPI\\PushNotificationAPI.csproj",
+      "projectUniqueName": "E:\\New folder\\Navvis\\codebase\\CoreoHome\\PushNotificationPOC\\PushNotificationAPI\\PushNotificationAPI\\PushNotificationAPI.csproj",
       "projectName": "PushNotificationAPI",
-      "projectPath": "E:\\New folder\\Navvis\\codebase\\CoreoHome\\Push Notification\\PushNotificationAPI\\PushNotificationAPI\\PushNotificationAPI.csproj",
+      "projectPath": "E:\\New folder\\Navvis\\codebase\\CoreoHome\\PushNotificationPOC\\PushNotificationAPI\\PushNotificationAPI\\PushNotificationAPI.csproj",
       "packagesPath": "C:\\Users\\praveenag\\.nuget\\packages\\",
-      "outputPath": "E:\\New folder\\Navvis\\codebase\\CoreoHome\\Push Notification\\PushNotificationAPI\\PushNotificationAPI\\obj\\",
+      "outputPath": "E:\\New folder\\Navvis\\codebase\\CoreoHome\\PushNotificationPOC\\PushNotificationAPI\\PushNotificationAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
