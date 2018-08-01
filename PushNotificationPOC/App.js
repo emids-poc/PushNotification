@@ -19,6 +19,10 @@ const instructions = Platform.select({
 
 export default class App extends Component {
 
+  state ={
+    token: ''
+  }
+
   componentDidMount() {
     firebase.messaging().hasPermission()
       .then(enabled => {
@@ -45,29 +49,31 @@ export default class App extends Component {
       .then(fcmToken => {
         if (fcmToken) {
           console.log("Token: " + fcmToken);
+          this.setState({token: fcmToken});
         } else {
-          console.log("No Token Generated");
+          alert("No Token Generated");
         } 
       });
 
     this.onTokenRefreshListener = firebase.messaging().onTokenRefresh(fcmToken => {
-      alert("Token: " + fcmToken);
+      //console.log("Token: " + fcmToken);
+      //this.setState({token: fcmToken});
     });
 
     this.notificationDisplayedListener = firebase.notifications().onNotificationDisplayed((notification) => {
-      console.log("onNotificationDisplayed: " + notification);
+      alert("onNotificationDisplayed: " + notification);
     });
     this.notificationListener = firebase.notifications().onNotification((notification) => {
-      console.log("onNotification: " + notification);
+      alert("onNotification: " + notification);
     });
 
     this.notificationOpenedListener = firebase.notifications().onNotificationOpened((notificationOpen) => {
       // Get the action triggered by the notification being opened
         const action = notificationOpen.action;
-        console.log("notificationOpen.action: " + notificationOpen.action);
+        alert("notificationOpen.action: " + notificationOpen.action);
         // Get information about the notification that was opened
         const notification = notificationOpen.notification;
-        console.log("notificationOpen.notification: " + notificationOpen.notification);
+        alert("notificationOpen.notification: " + notificationOpen.notification);
     });
 
     firebase.notifications().getInitialNotification()
@@ -75,10 +81,10 @@ export default class App extends Component {
         if (notificationOpen) {
           // App was opened by a notification
           const action = notificationOpen.action;
-          console.log("notificationOpen.action: " + notificationOpen.action);
+          alert("notificationOpen.action: " + notificationOpen.action);
           // Get information about the notification that was opened
           const notification = notificationOpen.notification;
-          console.log("notificationOpen.notification: " + notificationOpen.notification);
+          alert("notificationOpen.notification: " + notificationOpen.notification);
         }
       });
 
@@ -106,6 +112,7 @@ export default class App extends Component {
         <Text style={styles.welcome}>Welcome to React Native!</Text>
         <Text style={styles.instructions}>To get started, edit App.js</Text>
         <Text style={styles.instructions}>{instructions}</Text>
+        <Text style={styles.instructions}>{this.state.token}</Text>
       </View>
     );
   }
