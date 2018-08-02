@@ -8,6 +8,8 @@ using RabbitMQ.Client.Events;
 using System;
 using System.Text;
 using System.Threading;
+using System.IO;
+using System.Reflection;
 
 namespace PushNotificationService
 {
@@ -62,7 +64,9 @@ namespace PushNotificationService
 
         public static void SendPushNotification(FcmMessage message)
         {
-            var settings = FileBasedFcmClientSettings.CreateFromFile("pushnotificationpoc-6a4f2", @"E:\New folder\Navvis\codebase\CoreoHome\Push Notification\serviceAccountKey.json");
+            //var settings = FileBasedFcmClientSettings.CreateFromFile("pushnotificationpoc-6a4f2", @"E:\New folder\Navvis\codebase\CoreoHome\Push Notification\serviceAccountKey.json");
+            string startupPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            var settings = FileBasedFcmClientSettings.CreateFromFile("pushnotificationpoc-6a4f2", startupPath + "\\serviceAccountKey.json");
 
             // Construct the Client:
             using (var client = new FcmClient(settings))
