@@ -22,7 +22,9 @@ export default class App extends Component {
   state = {
     token: '',
     body: '',
-    title: ''
+    title: '',
+    userId: null,
+    topic: ''
   }
 
   componentDidMount() {
@@ -58,7 +60,7 @@ export default class App extends Component {
       });
 
     this.onTokenRefreshListener = firebase.messaging().onTokenRefresh(fcmToken => {
-      alert("Token: " + fcmToken);
+      console.log("Token: " + fcmToken);
     });
 
     this.notificationDisplayedListener = firebase.notifications().onNotificationDisplayed((notification) => {
@@ -89,14 +91,7 @@ export default class App extends Component {
         }
       });
 
-    const notification = new firebase.notifications.Notification()
-      .setNotificationId('1')
-      .setTitle('title')
-      .setBody('description')
-      .setData({
-        key: true,
-        key2: false
-      });
+    firebase.messaging().subscribeToTopic("emids");
   }
 
   componentWillUnmount() {
@@ -108,10 +103,29 @@ export default class App extends Component {
   }
 
   sendNotification = () => {
-    fetch("http://52.172.45.185:9000/api/values/post_message", {
+    const values = {
+      notificationTitle: this.state.title,
+      notificationBody: this.state.body,
+      topic: this.state.topic
+    };
+    fetch("http://52.172.45.185:9000/api/SendNotification", {
       method: 'post',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify(this.state)
+    }).then((data) => {
+      console.log(data);
+    });
+  }
+
+  registerDevice = () => {
+    const values = {
+      userId: this.state.userId,
+      token: this.state.token
+    };
+    fetch("http://52.172.45.185:9000/api/TokenStore", {
+      method: 'post',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(values)
     }).then((data) => {
       console.log(data);
     });
@@ -124,6 +138,12 @@ export default class App extends Component {
         <Text style={styles.instructions}>{this.state.token}</Text>
         <TextInput
           style={{height: 40, borderColor: 'gray', borderWidth: 1, width: 300}}
+          onChangeText={(userId) => this.setState({userId})}
+          value={this.state.userId}
+          placeholder="UserId"
+        />
+        <TextInput
+          style={{height: 40, borderColor: 'gray', borderWidth: 1, width: 300}}
           onChangeText={(title) => this.setState({title})}
           value={this.state.title}
           placeholder="Title"
@@ -133,6 +153,16 @@ export default class App extends Component {
           onChangeText={(body) => this.setState({body})}
           value={this.state.body}
           placeholder="Body"
+        />
+        <TextInput
+          style={{height: 40, borderColor: 'gray', borderWidth: 1, width: 300}}
+          onChangeText={(topic) => this.setState({topic})}
+          value={this.state.topic}
+          placeholder="Topic"
+        />
+        <Button
+          onPress={this.registerDevice}
+          title="Register Device"
         />
         <Button
           onPress={this.sendNotification}

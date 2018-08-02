@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace PushNotificationAPI.Models
 {
-    public class User
+    public class UserToken
     {
         public string token { get; set; }
-        public string userId { get; set; }
+        public int userId { get; set; }
     }
 }

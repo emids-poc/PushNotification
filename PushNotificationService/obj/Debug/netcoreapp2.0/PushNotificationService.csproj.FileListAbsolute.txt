@@ -1,0 +1,11 @@
+E:\New folder\Navvis\codebase\CoreoHome\PushNotificationPOC\PushNotificationService\bin\Debug\netcoreapp2.0\PushNotificationService.deps.json
+E:\New folder\Navvis\codebase\CoreoHome\PushNotificationPOC\PushNotificationService\bin\Debug\netcoreapp2.0\PushNotificationService.runtimeconfig.json
+E:\New folder\Navvis\codebase\CoreoHome\PushNotificationPOC\PushNotificationService\bin\Debug\netcoreapp2.0\PushNotificationService.runtimeconfig.dev.json
+E:\New folder\Navvis\codebase\CoreoHome\PushNotificationPOC\PushNotificationService\bin\Debug\netcoreapp2.0\PushNotificationService.dll
+E:\New folder\Navvis\codebase\CoreoHome\PushNotificationPOC\PushNotificationService\obj\Debug\netcoreapp2.0\PushNotificationService.csproj.CoreCompileInputs.cache
+E:\New folder\Navvis\codebase\CoreoHome\PushNotificationPOC\PushNotificationService\obj\Debug\netcoreapp2.0\PushNotificationService.AssemblyInfoInputs.cache
+E:\New folder\Navvis\codebase\CoreoHome\PushNotificationPOC\PushNotificationService\obj\Debug\netcoreapp2.0\PushNotificationService.AssemblyInfo.cs
+E:\New folder\Navvis\codebase\CoreoHome\PushNotificationPOC\PushNotificationService\obj\Debug\netcoreapp2.0\PushNotificationService.csprojAssemblyReference.cache
+E:\New folder\Navvis\codebase\CoreoHome\PushNotificationPOC\PushNotificationService\bin\Debug\netcoreapp2.0\PushNotificationService.pdb
+E:\New folder\Navvis\codebase\CoreoHome\PushNotificationPOC\PushNotificationService\obj\Debug\netcoreapp2.0\PushNotificationService.dll
+E:\New folder\Navvis\codebase\CoreoHome\PushNotificationPOC\PushNotificationService\obj\Debug\netcoreapp2.0\PushNotificationService.pdb
