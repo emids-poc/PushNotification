@@ -1,0 +1,43 @@
+html, body, #root, .container {
+  overflow: auto;
+  height: 100%;
+  margin: 0;
+  background-color: #ccc;
+}
+
+.container{
+  width: 100%;
+  max-width: 28rem;
+  background-color: #fff;
+  margin: auto;
+}
+
+.info{
+  margin-top: 3rem;
+  padding: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+button{
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  background-color: #0391ff;
+  color: #fff;
+  border-radius: .3rem;
+  height: 2rem;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: .1rem 1rem 0;
+  cursor: pointer;
+  user-select: none;
+  transition: all .3s cubic-bezier(.175,.885,.32,1.275);
+  border: 0;
+  margin: 0 .5rem;
+}
+
+.disabled{
+  background-color: #a9a9a9;
+  cursor: not-allowed;
+}
